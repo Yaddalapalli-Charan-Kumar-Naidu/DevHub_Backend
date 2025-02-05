@@ -1,0 +1,21 @@
+{
+  "name": "devhub",
+  "version": "1.0.0",
+  "description": "a place for developers to connect",
+  "keywords": [
+    "nodejs",
+    "javascript"
+  ],
+  "license": "ISC",
+  "author": "Charan Kumar Naidu",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start":"node src/app.js",
+    "dev":"nodemon src/app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}
