@@ -9,8 +9,12 @@ import authRouter from "./routes/authRouter.js";
 import profileRouter from "./routes/profileRouter.js";
 import requestRouter from "./routes/requestRouter.js";
 import userRouter from "./routes/userRouter.js";
+import cors from "cors";
 
-
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true
+}))
 app.use(express.json());
 app.use(cookieParser());
 

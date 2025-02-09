@@ -69,7 +69,8 @@ const userSchema=new Schema({
             if(!validator.isURL(value)){
                 throw new Error("Enter a valid image url");
             }
-        }
+        },
+        default:"https://th.bing.com/th/id/OIP.aHjd-plky9ldFCUtDmhXAgHaHa?w=152&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7"
     }
 },{
     timestamps:true

@@ -7,6 +7,7 @@ export const getProfile=async(req,res)=>{
         res.status(200).json({
             user:req.user
         })
+        
     }
     catch(err){
         res.status(500).send("Error:"+err.message);
