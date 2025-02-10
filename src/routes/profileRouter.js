@@ -6,7 +6,7 @@ const profileRouter=express.Router();
 
 profileRouter.get("/view",authenticate,getProfile);
 
-profileRouter.patch("/edit",authenticate,editProfile);
+profileRouter.put("/edit",authenticate,editProfile);
 
 profileRouter.patch("/password",authenticate,changePassword);
 

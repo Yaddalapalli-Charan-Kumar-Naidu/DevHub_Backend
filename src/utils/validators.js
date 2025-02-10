@@ -14,7 +14,7 @@ export const signupValidator=(req)=>{
     }
 }
 export const validateEdit=(req)=>{
-    const Changable_details=["firstName","lastName","skills","about","age","gender","photoUrl"];
+    const Changable_details=["firstName","lastName","skills","about","age","gender","photoURL"];
     const isValid=Object.keys(req.body).every(element => (
         Changable_details.includes(element)
     ));

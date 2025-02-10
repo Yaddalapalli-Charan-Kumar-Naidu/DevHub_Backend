@@ -13,8 +13,10 @@ import cors from "cors";
 
 app.use(cors({
   origin: process.env.FRONTEND_URL,
+  methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
   credentials: true
 }))
+
 app.use(express.json());
 app.use(cookieParser());
 
