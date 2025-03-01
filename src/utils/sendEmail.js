@@ -1,7 +1,7 @@
 import { SendEmailCommand } from "@aws-sdk/client-ses";
 import { sesClient } from "./sesClient.js";
 
-const createSendEmailCommand = (toAddress, fromAddress) => {
+const createSendEmailCommand = (toAddress, fromAddress,subject,body) => {
   return new SendEmailCommand({
     Destination: {
       /* required */
@@ -19,16 +19,16 @@ const createSendEmailCommand = (toAddress, fromAddress) => {
         /* required */
         Html: {
           Charset: "UTF-8",
-          Data: "HTML_FORMAT_BODY",
+          Data: body,
         },
         Text: {
           Charset: "UTF-8",
-          Data: "TEXT_FORMAT_BODY",
+          Data: body,
         },
       },
       Subject: {
         Charset: "UTF-8",
-        Data: "EMAIL_SUBJECT",
+        Data:subject,
       },
     },
     Source: fromAddress,
@@ -38,17 +38,19 @@ const createSendEmailCommand = (toAddress, fromAddress) => {
   });
 };
 
-const sendEmail = async (toAddress) => {
+const sendEmail = async (subject,body,toAddress) => {
   const sendEmailCommand = createSendEmailCommand(
-    toAddress,
+    "charan.cheery2004@gmail.com",
     "charankumarnaidu2004@gmail.com",
+    subject,
+    body
   );
 
   try {
     console.log("📩 Sending email to:", toAddress);
     const response = await sesClient.send(sendEmailCommand);
     // console.log(response);
-    console.log("✅ Email sent successfully:", response);
+    console.log("✅ Email sent successfully:",toAddress);
     return response;
   } catch (caught) {
     if (caught instanceof Error && caught.name === "MessageRejected") {
