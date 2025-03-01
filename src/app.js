@@ -10,6 +10,7 @@ import profileRouter from "./routes/profileRouter.js";
 import requestRouter from "./routes/requestRouter.js";
 import userRouter from "./routes/userRouter.js";
 import cors from "cors";
+import sendEmail from "./utils/sendEmail.js";
 
 app.use(cors({
   origin: process.env.FRONTEND_URL,
@@ -20,7 +21,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-
+sendEmail("charan.cheery2004@gmail.com");
 app.use("/auth",authRouter);
 app.use("/profile",profileRouter);
 app.use("/request",requestRouter);
