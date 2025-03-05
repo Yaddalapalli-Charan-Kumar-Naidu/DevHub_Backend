@@ -24,20 +24,22 @@ const createSocket = async (server) => {
       const roomId = [userId, targetUserId].sort().join("-");
       console.log(`Message from ${userId} to ${targetUserId}: ${message}`);
       //save user chat
-      const chat = await Chat.findOne({ participants: { $all: [userId, targetUserId] } });
+      let chat = await Chat.findOne({ participants: { $all: [userId, targetUserId] } });
+      // console.log(chat);
       if (!chat) {
         chat = new Chat({
           participants: [userId, targetUserId],
           messages: [],
         });
       }
+      // console.log("Chat2:",chat);
       chat.messages.push({ firstName,lastName,senderId: userId, message, });
       await chat.save();
 
       // Make sure to send message only once
-      io.to(roomId).emit("receiveMessage", { sender: userId, message });
+      io.to(roomId).emit("receiveMessage", { sender: userId,firstName, message });
       } catch (error) {
-        console.log(error.message);
+        console.error("Error:"+error.message);
       }
     });
 
