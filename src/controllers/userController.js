@@ -1,7 +1,7 @@
 import { Request } from "../models/requests.js";
 import { User } from "../models/user.js";
 
-const SAFE_DATA = "firstName lastName photoUrl age gender about skills";
+const SAFE_DATA = "firstName lastName photoURL age gender about skills";
 export const getRequests = async (req, res) => {
   try {
     const userId = req.user.id;
