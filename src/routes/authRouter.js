@@ -41,7 +41,12 @@ authRouter.post("/login", async (req, res) => {
     const isValidPassword = await user.comparePassword(password);
     if (isValidPassword) {
       const token = await user.getJWT();
-      res.cookie("token", token);
+      res.cookie("token", tokenValue, {
+        httpOnly: true,
+        secure: true,           // ✅ Required for HTTPS
+        sameSite: "None",       // ✅ Required for cross-origin cookies
+      });
+      
       
       res.status(200.).json({"msg":"Login succesful","data":user});
     } else {
