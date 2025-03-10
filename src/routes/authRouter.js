@@ -41,7 +41,7 @@ authRouter.post("/login", async (req, res) => {
     const isValidPassword = await user.comparePassword(password);
     if (isValidPassword) {
       const token = await user.getJWT();
-      res.cookie("token", tokenValue, {
+      res.cookie("token", token, {
         httpOnly: true,
         secure: true,           // ✅ Required for HTTPS
         sameSite: "None",       // ✅ Required for cross-origin cookies
