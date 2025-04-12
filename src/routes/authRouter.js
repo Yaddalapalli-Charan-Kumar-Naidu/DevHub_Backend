@@ -42,9 +42,9 @@ authRouter.post("/login", async (req, res) => {
     if (isValidPassword) {
       const token = await user.getJWT();
       res.cookie("token", token, {
-        httpOnly: true,
-        secure: true,           // ✅ Required for HTTPS
-        sameSite: "None",       // ✅ Required for cross-origin cookies
+        httpOnly: process.env.FRONTEND_URL!=="http://localhost:5173",
+        secure: process.env.FRONTEND_URL!=="http://localhost:5173",           // ✅ Required for HTTPS
+        sameSite: process.env.FRONTEND_URL !== "http://localhost:5173" ? "None" : "Lax",       // ✅ Required for cross-origin cookies
       });
       
       
