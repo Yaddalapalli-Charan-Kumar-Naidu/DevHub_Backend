@@ -41,14 +41,18 @@ authRouter.post("/login", async (req, res) => {
     const isValidPassword = await user.comparePassword(password);
     if (isValidPassword) {
       const token = await user.getJWT();
+      const isLocalhost = process.env.FRONTEND_URL === "http://localhost:5173";
+
       res.cookie("token", token, {
-        httpOnly: process.env.FRONTEND_URL!=="http://localhost:5173",
-        secure: process.env.FRONTEND_URL!=="http://localhost:5173",           // ✅ Required for HTTPS
-        sameSite: process.env.FRONTEND_URL !== "http://localhost:5173" ? "None" : "Lax",       // ✅ Required for cross-origin cookies
+        httpOnly: !isLocalhost,
+        secure: !isLocalhost,
+        sameSite: isLocalhost ? "Lax" : "None",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       });
-      
-      
-      res.status(200.).json({"msg":"Login succesful","data":user});
+
+
+
+      res.status(200.).json({ "msg": "Login succesful", "data": user });
     } else {
       throw new Error("Invalid credentials");
     }
@@ -56,11 +60,11 @@ authRouter.post("/login", async (req, res) => {
     res.status(500).send("Error:" + err.message);
   }
 });
-authRouter.post("/logout",(req,res)=>{
-    res.cookie("token",null,{
-        expires:new Date(Date.now())
-    })
-    res.status(200).json({"msg":"Logout successful"})
+authRouter.post("/logout", (req, res) => {
+  res.cookie("token", null, {
+    expires: new Date(Date.now())
+  })
+  res.status(200).json({ "msg": "Logout successful" })
 })
 
 authRouter.get("/profile", authenticate, (req, res) => {
