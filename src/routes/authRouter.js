@@ -72,7 +72,7 @@ authRouter.get("/profile", authenticate, (req, res) => {
     res.status(400).send("Error:" + err.message);
   }
 });
-app.get("/me", (req, res) => {
+authRouter.get("/me", (req, res) => {
   const token = req.cookies.token;
   if (!token) return res.status(401).json({ message: "Unauthorized" });
   try {
