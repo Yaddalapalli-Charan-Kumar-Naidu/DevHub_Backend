@@ -44,7 +44,7 @@ authRouter.post("/login", async (req, res) => {
       const isLocalhost = process.env.FRONTEND_URL === "http://localhost:5173";
 
       res.cookie("token", token, {
-        httpOnly: true,
+        httpOnly: false,
         secure: true,
         sameSite: "None",
             });
